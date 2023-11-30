@@ -12,8 +12,8 @@ The sbs.24576.txt file contains all of the following the pyrimidine single nucle
 *16 (4x4) possible starting nucleotides x 16 (4x4) nucleotides x 6 pyrimidine variants x 16 (4x4) nucleotides x 16 (4x4) possible ending dinucleotides = 24576 total combinations.*
 """
 import sys
-import click
 from pathlib import Path
+import click
 from GenomeSigInfer.sbs import SBSMatrixGenerator
 
 
@@ -43,15 +43,15 @@ from GenomeSigInfer.sbs import SBSMatrixGenerator
     default="GRCh37",
     help="Choose genome version.",
 )
-def main(sbs_out: Path, ref_genome: Path, vcf: tuple, genome: str) -> int:
+def main(sbs_out: Path, ref_genome: Path, vcf: tuple[tuple], genome: str) -> int:
     """
     Main entry point of the script.
 
     Args:
-        project (Path): Path of the project folder.
-        vcf (tuple): Tuple pf the vcf files list.
+        sbs_out (Path): Path of the project folder.
+        ref_genome (Path): Path of the reference genome.
+        vcf (tuple[tuple]): Tuple pf the vcf files list.
         genome (str): Reference genome.
-        bash (bool): If you want to download using bash.
 
     Returns:
         int: Exit status (0 for success).
