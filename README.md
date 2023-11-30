@@ -4,5 +4,7 @@
 # Building Mutational Signatures in Cancer using Deep Bayesian Neural Nets
 
 <sub><sub>**J.A. Busker**</sub></sub>
+
 <sub><sub>**Hanze University of Applied Sciences, Groningen**</sub></sub>
+
 <sub><sub>**UMCG department of Epidemiology, Groningen**</sub></sub>
