@@ -58,7 +58,7 @@ def main(sbs_out: Path, ref_genome: Path, vcf: tuple[tuple], genome: str) -> int
     """
     # Create SBS files
     SBSMatrixGenerator.generate_sbs_matrix(
-        project=sbs_out, ref_genome=ref_genome, vcf=vcf, genome=genome
+        folder=sbs_out, ref_genome=ref_genome, vcf_files=vcf, genome=genome
     )
 
 
