@@ -2,7 +2,7 @@
 """
 Create nmf files and deconmpose mutational signatures from NMF results.
 
-And calculates the cosine similarity between each file's signature data and a reference column.
+And calculate the similarities between each file's signature data and a reference column.
 
 This script takes input parameters for the smallest context SBS file (--sbs-96),
 larger context SBS files (--sbs-lg), the number of signatures (--sigs), the cosmic
@@ -10,9 +10,10 @@ file (--cosmic), NMF initialization method (--nmf-init), and the beta loss funct
 for NMF (--beta-loss). It then prints the provided parameters.
 """
 import sys
-import click
 from pathlib import Path
+import click
 from GenomeSigInfer.nmf import NMFMatrixGenerator
+
 
 def unique_paths(ctx, param, value):
     """
@@ -54,6 +55,7 @@ def positive_number(ctx, param, value):
         raise click.BadParameter("The number of signatures must be a positive integer.")
     return value
 
+
 @click.command()
 @click.option(
     "--sbs-dir",
@@ -61,7 +63,13 @@ def positive_number(ctx, param, value):
     default="project/NMF",
     help="The location of the SBS files",
 )
-@click.option("--sigs", type=click.INT, help="The number of signatures", required=True, callback=positive_number)
+@click.option(
+    "--sigs",
+    type=click.INT,
+    help="The number of signatures",
+    required=True,
+    callback=positive_number,
+)
 @click.option(
     "--cosmic",
     type=click.Path(file_okay=True, dir_okay=False, exists=True, path_type=Path),
@@ -76,8 +84,8 @@ def positive_number(ctx, param, value):
 )
 @click.option(
     "--beta-loss",
-    type=click.Choice(['frobenius', 'kullback-leibler', 'itakura-saito']),
-    default='frobenius',
+    type=click.Choice(["frobenius", "kullback-leibler", "itakura-saito"]),
+    default="frobenius",
     help="Beta loss function for NMF. Choose from 'frobenius', 'kullback-leibler', or 'itakura-saito'.",
 )
 @click.option(
@@ -92,13 +100,20 @@ def positive_number(ctx, param, value):
     default="project/results",
     help="The location for the NMF files",
 )
-def main(sbs_dir: Path, sigs: int, cosmic: Path, nmf_init: str, beta_loss: str, nmf_dir: Path, res_dir: Path) -> int:
+def main(
+    sbs_dir: Path,
+    sigs: int,
+    cosmic: Path,
+    nmf_init: str,
+    beta_loss: str,
+    nmf_dir: Path,
+    res_dir: Path,
+) -> int:
     """
     Main function for the script.
 
     Args:
-        sbs_96 (Path): Path to the smallest context SBS file.
-        sbs_lg (tuple[Path]): Paths to the larger context SBS files.
+        sbs_dir (Path): Path of the SBS files.
         sigs (int): Number of signatures.
         cosmic (Path): Path to the cosmic file.
         nmf_init (str): NMF initialization method.
@@ -109,6 +124,7 @@ def main(sbs_dir: Path, sigs: int, cosmic: Path, nmf_init: str, beta_loss: str, 
     Returns:
         int: Exit code.
     """
+    # Create NMF files and calculate the similarities
     NMFMatrixGenerator.generate_nmf_matrix(
         sbs_folder=sbs_dir,
         signatures=sigs,
@@ -116,8 +132,9 @@ def main(sbs_dir: Path, sigs: int, cosmic: Path, nmf_init: str, beta_loss: str, 
         nmf_folder=nmf_dir,
         nmf_init=nmf_init,
         beta_los=beta_loss,
-        result_folder=res_dir
+        result_folder=res_dir,
     )
+
 
 if __name__ == "__main__":
     sys.exit(main())

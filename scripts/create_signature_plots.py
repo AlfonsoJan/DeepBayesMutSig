@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
-Create nmf files and deconmpose mutational signatures from NMF results.
-And calculates the `cosine similarity` between each file's signature data and a reference column.
+Create a plot for each signature identified that depicts the proportion of the mutations for that signatur
 """
 import sys
-import click
 from pathlib import Path
+import click
 from GenomeSigInfer.figures import signature_plots
 
 
@@ -27,10 +26,8 @@ def main(nmf_folder: Path, result_folder: Path) -> int:
     Main entry point of the script.
 
     Args:
-        project (Path): Path of the project folder.
-        vcf (tuple): Tuple pf the vcf files list.
-        genome (str): Reference genome.
-        bash (bool): If you want to download using bash.
+        nmf_folder (Path): Path of the NMF files".
+        result_folder (Path): Path of the plots folder.
 
     Returns:
         int: Exit status (0 for success).
