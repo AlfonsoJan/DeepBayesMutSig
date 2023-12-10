@@ -1,2 +1,1 @@
 GenomeSigInfer @ git+https://github.com/AlfonsoJan/GenomeSigInfer@main
-click==8.1.7
