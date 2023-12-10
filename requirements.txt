@@ -1,1 +1,2 @@
 GenomeSigInfer @ git+https://github.com/AlfonsoJan/GenomeSigInfer@main
+ipykernel==6.27.1 # For the notebooks
