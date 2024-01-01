@@ -4,10 +4,10 @@ This module provides functions for loading and processing mutation spectrum data
 """
 import sys
 from pathlib import Path
-import pandas as pd
-from gabenet.utils import holdout_split
-import jax.numpy as jnp
+from mubelnet.utils import holdout_split
 import haiku as hk
+import jax.numpy as jnp
+import pandas as pd
 
 
 _PATH_COSMIC_FOLDER = Path(__file__).parent.parent.parent / "data"
@@ -35,12 +35,12 @@ def _read_sbs_file(filename: str, folder: Path = _PATH_SBS) -> pd.DataFrame:
     return df
 
 
-def _build_mutation_spectrum(random_state: int = 42, context: int = 96) -> tuple[jnp.ndarray, jnp.ndarray]:
+def _build_mutation_spectrum(random_state: int = 43, context: int = 96) -> tuple[jnp.ndarray, jnp.ndarray]:
     """
     Build the mutation spectrum.
 
     Args:
-        random_state (int): Random seed for reproducibility. Default is 42.
+        random_state (int): Random seed for reproducibility. Default is 43.
         context (int): Context size. Default is 96.
 
     Returns:
@@ -52,12 +52,12 @@ def _build_mutation_spectrum(random_state: int = 42, context: int = 96) -> tuple
     return X_train, X_test
 
 
-def load_mutation_spectrum(random_state: int = 42, context: int = 96, folder: Path = _PATH_SBS) -> tuple[jnp.ndarray, jnp.ndarray, int]:
+def load_mutation_spectrum(random_state: int = 43, context: int = 96, folder: Path = _PATH_SBS) -> tuple[jnp.ndarray, jnp.ndarray, int]:
     """
     Load the mutation spectrum data.
 
     Args:
-        random_state (int): Random seed for reproducibility. Default is 42.
+        random_state (int): Random seed for reproducibility. Default is 43.
         context (int): Context size. Default is 96.
         folder (Path): Path to the folder containing the data files. Default is _PATH_SBS.
 
