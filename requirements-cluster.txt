@@ -1,0 +1,5 @@
+gabenet @ git+https://gitlab.com/hylkedonker/mubelnet.git@93f939dbb5d61423b915783f14022facf68fb734 # 93f939db
+# mubelnet @ git+https://gitlab.com/hylkedonker/mubelnet@7ed677cdb1a3bfdfec38d9793af7589c19a39458
+pandas==1.5.0
+pyarrow==14.0.1
+fastparquet==2023.10.1
