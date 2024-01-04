@@ -203,11 +203,12 @@ for _ in range(n_start, n_stop):
     save_states(train_state, {})
     print("Burn in", train_state.step)
 
-trace = []
-for i in range(N_SAMPLES // n_chains):
-    train_state = train_step(kernel_fn, train_state, n_steps=1)
-    trace.append(train_state.state)
-
-states = jax.tree_util.tree_map(lambda *xs: jnp.stack(xs, axis=1), *trace)
-
-save_states(train_state, states)
+for _ in range(10):
+  trace = []
+  for i in range(LOG_EVERY):
+      train_state = train_step(kernel_fn, train_state, n_steps=1)
+      trace.append(train_state.state)
+  
+  states = jax.tree_util.tree_map(lambda *xs: jnp.stack(xs, axis=1), *trace)
+  
+  save_states(train_state, states)
