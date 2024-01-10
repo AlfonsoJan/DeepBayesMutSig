@@ -47,11 +47,7 @@ buffer
 .vscode
 data/vcf
 ref_genome/
-checkpoint_008*
-checkpoint_009*
 checkpoint_01*
 checkpoint_02*
-sample_008*
-sample_009*
 sample_01*
 sample_02*
