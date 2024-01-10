@@ -37,7 +37,7 @@ output/
 .env
 .venv
 env/
-venv/
+venv*/
 ENV/
 env.bak/
 venv.bak/
@@ -46,3 +46,8 @@ venv.bak/
 buffer
 .vscode
 data/vcf
+ref_genome/
+checkpoint_01*
+checkpoint_02*
+sample_01*
+sample_02*
