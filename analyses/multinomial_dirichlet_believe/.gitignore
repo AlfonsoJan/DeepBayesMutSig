@@ -1,0 +1,6 @@
+# Ignore everything in this directory
+41-86/checkpoints/*
+41-86/samples/*
+
+# Except this file
+!.gitignore

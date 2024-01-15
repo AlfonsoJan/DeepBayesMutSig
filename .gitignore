@@ -47,4 +47,5 @@ buffer
 .vscode
 data/vcf
 ref_genome/
-multinomial_belief/
+# multinomial_dirichlet_believe/*
+# # !multinomial_dirichlet_believe/.gitkeep
