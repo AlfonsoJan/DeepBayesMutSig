@@ -3,4 +3,6 @@ GenomeSigInfer @ git+https://github.com/AlfonsoJan/GenomeSigInfer@main
 ipykernel==6.27.1 # For the notebooks
 statkit==0.2.3
 arviz==0.17.0
-# DEZE NOG HIERIN SIGPROFILER VOOR BEST PARAM
+SigProfilerExtractor==1.1.23
+SigProfilerAssignment==0.1.0
+scikit-learn==1.3.2
