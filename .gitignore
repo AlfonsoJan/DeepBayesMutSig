@@ -45,7 +45,3 @@ venv.bak/
 # Misch.
 buffer
 .vscode
-data/vcf
-ref_genome/
-# multinomial_dirichlet_believe/*
-# # !multinomial_dirichlet_believe/.gitkeep
