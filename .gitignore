@@ -47,7 +47,4 @@ buffer
 .vscode
 data/vcf
 ref_genome/
-checkpoint_01*
-checkpoint_02*
-sample_01*
-sample_02*
+multinomial_belief/

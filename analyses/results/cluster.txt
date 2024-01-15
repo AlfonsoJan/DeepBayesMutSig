@@ -1,0 +1,23 @@
+sbs.96.parquet	Train perplexity	6.3$^{+0.5}_{-0.4} \cdot 10^{1}$
+sbs.96.parquet	Test perplexity	6.7$^{+0.5}_{-0.5} \cdot 10^{1}$
+sbs.96.parquet	Test subset perplexity	6.7$^{+0.9}_{-0.8} \cdot 10^{1}$
+
+sbs.1536.parquet	Train perplexity	6.7$^{+0.1}_{-0.1} \cdot 10^{1}$
+sbs.1536.parquet	Test perplexity	7.1$^{+0.2}_{-0.2} \cdot 10^{1}$
+sbs.1536.parquet	Test subset perplexity	7.2$^{+0.2}_{-0.2} \cdot 10^{1}$
+
+sbs.24576.parquet	Train perplexity	6.52$^{+0.03}_{-0.03} \cdot 10^{1}$
+sbs.24576.parquet	Test perplexity	8.32$^{+0.5}_{-0.4} \cdot 10^{2}$
+sbs.24576.parquet	Test subset perplexity	7.0$^{+0.6}_{-0.4} \cdot 10^{2}$
+
+sbs.24576.amino.parquet	Train perplexity	6.54$^{+0.02}_{-0.03} \cdot 10^{1}$
+sbs.24576.amino.parquet	Test perplexity	9.62$^{+0.5}_{-0.5} \cdot 10^{2}$
+sbs.24576.amino.parquet	Test subset perplexity	8.9$^{+0.4}_{-0.4} \cdot 10^{2}$0
+
+sbs.24576.nucl_strength.parquet	Train perplexity	6.54$^{+0.03}_{-0.03} \cdot 10^{1}$
+sbs.24576.nucl_strength.parquet	Test perplexity	9.62$^{+0.6}_{-0.6} \cdot 10^{2}$
+sbs.24576.nucl_strength.parquet	Test subset perplexity	8.90$^{+0.7}_{-0.6} \cdot 10^{2}$
+
+sbs.24576.structure.parquet	Train perplexity	6.67$^{+0.03}_{-0.03} \cdot 10^{1}$
+sbs.24576.structure.parquet	Test perplexity	8.72$^{+0.5}_{-0.5} \cdot 10^{2}$
+sbs.24576.structure.parquet	Test subset perplexity	8.1$^{+0.6}_{-0.6} \cdot 10^{2}$

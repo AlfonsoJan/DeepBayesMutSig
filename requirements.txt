@@ -2,3 +2,5 @@ mubelnet @ git+https://gitlab.com/hylkedonker/mubelnet@7ed677cdb1a3bfdfec38d9793
 GenomeSigInfer @ git+https://github.com/AlfonsoJan/GenomeSigInfer@main
 ipykernel==6.27.1 # For the notebooks
 statkit==0.2.3
+arviz==0.17.0
+# DEZE NOG HIERIN SIGPROFILER VOOR BEST PARAM
