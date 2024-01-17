@@ -7,8 +7,8 @@
 <sub><sub>**Hanze University of Applied Sciences, Groningen**</sub></sub>    
 <sub><sub>**UMCG department of Epidemiology, Groningen**</sub></sub>
 
-This project aims to refine the statistical model and the current representation of mutations in building mutational signatures in cancer using deep Bayesian neural nets. Cancer is characterized by uncontrolled growth of cells, which is primarily acquired by mutation of the genome. These mutations have accrued by exposure to DNA-damaging processes coming from within (endogenous) and from outside (exogenous) throughout the course of life. By looking at the direct context of the mutations, we can infer the way these mutations were created (aetiology).
-	
+This project aims to refine the statistical model and the current representation of mutations in building mutational signatures in cancer using deep Bayesian neural nets. Cancer is characterized by uncontrolled growth of cells, which is primarily acquired by mutation of the genome. These mutations have accrued by exposure to DNA-damaging processes coming from within (endogenous) and from outside (exogenous) throughout the course of life. By looking at the direct context of the mutations, we can infer the way these mutations were created.
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -18,7 +18,13 @@ This project aims to refine the statistical model and the current representation
 
 ## Introduction
 
-Cancer is a disease of the genome, characterized by uncontrolled growth of cells acquired by mutation of the genome. These mutations have accrued by exposure to DNA-damaging processes coming from within and outside throughout the course of life. By looking at the direct context of the mutations, we can infer the way these mutations were created (aetiology). Most researchers have looked at the changing mutation including a single letter of context to the left and right. This has resulted in a curated set of mutational signatures by COSMIC, which can be viewed online. In addition, several methods have been developed to determine the signatures and infer the attributions. The goal of this project is to refine the statistical model and the current representation of the mutations.
+Cancer, characterized by uncontrolled cell growth, accumulate mutations. The mutations that occur in the context of cancer development are a result of exposure to various DNA-damaging processes and accumulate throughout life. The sources of these DNA-damaging processes include both endogenous and exogenous factors. These genetic variations result in unique "mutational signatures" within the DNA sequence.
+
+This project aims to refine the statistical model and the current representation of mutations by building mutational signatures of cancer using deep bayesian neural networks. Additionally, there is a plan to expand the representation to capture more context. Increasing the context involves subdividing mutations. By looking at an extra nucleotide on each side. This expansion aimed to reveal contextual imprints associated with surrounding nucleotides, employing techniques like Latent Dirichlet Allocation (LDA). The methodology centered on curating and quality controlling variant calling samples and replicating mutational signatures using Non-negative Matrix Factorization (NMF).
+
+Significant advancements were achieved in this study, particularly in the analysis of Single Base Substitutions (SBS) such as SBS7a, SBS22a, SBS10a, SBS13, and SBS17b, which provided a deeper understanding of their complex etiology through an expanded contextual framework. A novel single-run NMF approach for decomposing mutational signatures was introduced, marking a departure from traditional multi-iteration methods. The future vision involves enhancing the reliability of this single-run approach and integrating user-interactive clustering mechanisms, aiming to connect advanced genomic analysis with personalized cancer treatment strategies.
+
+The significance of this project lies not only in advancing our understanding of cancer mutational signatures but also in its implications for cancer diagnosis, treatment, and prevention.
 
 ## Project Structure
 
@@ -82,97 +88,6 @@ $ pip install -r requirements.txt
 ## Usage
 
 The scripts are meant to be run in order.
-
-### Setup
-
-Install your desired reference genome as follows:
-
-```python
-from GenomeSigInfer.utils import download
-ref_genome = "project/ref_genome" # Folder where the ref genome will be downloaded
-genome = "GRCh37" # Reference Genome
-bash = False # If you want to download the ref genome using bash
-download.download_ref_genome(ref_genome, genome, bash)
-```
-
-### Create SBS Files
-
-Create mutliple SBS files. With increasing context.
-
-The sbs.96.txt file contains all of the following the pyrimidine single nucleotide variants, N[{C > A, G, or T} or {T > A, G, or C}]N.
-*4 possible starting nucleotides x 6 pyrimidine variants x 4 ending nucleotides = 96 total combinations.*
-
-The sbs.1536.txt file contains all of the following the pyrimidine single nucleotide variants, NN[{C > A, G, or T} or {T > A, G, or C}]NN.
-*16 (4x4) possible starting nucleotides x 6 pyrimidine variants x 16 (4x4) possible ending nucleotides = 1536 total combinations.*
-
-The sbs.24576.txt file contains all of the following the pyrimidine single nucleotide variants, NNN[{C > A, G, or T} or {T > A, G, or C}]NNN.
-*16 (4x4) possible starting nucleotides x 16 (4x4) nucleotides x 6 pyrimidine variants x 16 (4x4) nucleotides x 16 (4x4) possible ending dinucleotides = 24576 total combinations.*
-
-```python
-from GenomeSigInfer.sbs import SBSMatrixGenerator
-sbs_out = "project/SBS" # Where the SBS files will be saved to
-ref_genome = Path("project/ref_genome") # Parent folder of the Ref genome
-vcf = (Path("test/files/test.vcf"),) # Tuple of the VCF file(s)
-genome = "GRCh37" # Ref genome
-SBSMatrixGenerator.generate_sbs_matrix(
-    folder=sbs_out, ref_genome=ref_genome, vcf_files=vcf, genome=genome
-)
-```
-
-or run `scripts\create_sbs_files.py` file.
-
-```bash
-$ python scripts/create_sbs_files.py
-```
-
-### Extract Signatures from SBS files
-
-Create nmf files and deconmpose mutational signatures from NMF results. And calculate the similarities between each file's signature data and the cosmic columns.
-
-```python
-from GenomeSigInfer.nmf import NMFMatrixGenerator
-sbs_dir = "project/SBS"  # Folder where the SBS files are located
-nmf_dir = "project/NMF" # Folder where the NMF files are saved to
-sigs = 48 # Amount of mutational signatures
-cosmic = "/path/to/cosmic.file" # Cosmic file name for the results (Path Object)
-res_dir = "project/results" # Folder where results from the analysis will be saved to
-nmf_init = "nndsvda" # Put here the best init from the last step
-beta_loss = "frobenius" # Put here the best beta_loss from the last step
-NMFMatrixGenerator.generate_nmf_matrix(
-    sbs_folder=sbs_dir,
-    signatures=sigs,
-    cosmic=cosmic,
-    nmf_folder=nmf_dir,
-    nmf_init=nmf_init,
-    beta_los=beta_loss,
-    result_folder=res_dir,
-)
-```
-
-or run `scripts\create_nmf_files.py` file.
-
-```bash
-$ python scripts/create_nmf_files.py
-```
-
-### Create Signature Plots
-
-Create signature plots for all the decomposed signatures files.
-
-```python
-from GenomeSigInfer.figures import signature_plots
-nmf_folder = "project/NMF" # Folder where the NMF files are located
-result_folder = "project/results" # Folder where the plots are saved to
-sig_plots = signature_plots.SigPlots(nmf_folder, result_folder)
-sig_plots.create_plots()
-sig_plots.create_expected_plots()
-```
-
-or run `scripts\create_signatures_plots.py` file.
-
-```bash
-$ python scripts/create_signatures_plots.py
-```
 
 ## References
 
