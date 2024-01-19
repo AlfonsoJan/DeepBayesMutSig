@@ -35,7 +35,9 @@ def _read_sbs_file(filename: str, folder: Path = _PATH_SBS) -> pd.DataFrame:
     return df
 
 
-def _build_mutation_spectrum(random_state: int = 43, context: int = 96) -> tuple[jnp.ndarray, jnp.ndarray]:
+def _build_mutation_spectrum(
+    random_state: int = 43, context: int = 96
+) -> tuple[jnp.ndarray, jnp.ndarray]:
     """
     Build the mutation spectrum.
 
@@ -52,7 +54,9 @@ def _build_mutation_spectrum(random_state: int = 43, context: int = 96) -> tuple
     return X_train, X_test
 
 
-def load_mutation_spectrum(random_state: int = 43, context: int = 96, folder: Path = _PATH_SBS) -> tuple[jnp.ndarray, jnp.ndarray, int]:
+def load_mutation_spectrum(
+    random_state: int = 43, context: int = 96, folder: Path = _PATH_SBS
+) -> tuple[jnp.ndarray, jnp.ndarray, int]:
     """
     Load the mutation spectrum data.
 

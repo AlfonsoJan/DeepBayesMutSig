@@ -26,6 +26,7 @@ URLS: list[str] = [
     "https://dcc.icgc.org/api/v1/download?fn=/PCAWG/mutational_signatures/Input_Data_PCAWG7_23K_Spectra_DB/vcf_like_simple_files/WGS_Other.20180413.simple.gz",
 ]
 
+
 # Function to download and unzip files
 def download_and_unzip(url: str, folder: Path) -> None:
     """

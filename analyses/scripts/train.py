@@ -33,9 +33,7 @@ print(f"LOG_EVERY = {LOG_EVERY}")
 print(f"N_SAMPLES = {N_SAMPLES}")
 
 # Model hyperparameters.
-MODEL: Literal[
-    "multinomial_belief", "poisson_gamma_believe"
-] = "multinomial_belief"
+MODEL: Literal["multinomial_belief", "poisson_gamma_believe"] = "multinomial_belief"
 MODEL = "multinomial_belief"
 n_topics = len(COSMIC_WEIGHTS)
 n_chains = jax.device_count()
@@ -51,10 +49,13 @@ print(f"n_topics = {n_topics}")
 print(f"HIDDEN_LAYER_SIZES = {HIDDEN_LAYER_SIZES}")
 print(f"GAMMA_0 = {GAMMA_0}")
 
-X_train, X_test, n_features = load_mutation_spectrum(random_state=RANDOM_SEED, context=CONTEXT)
+X_train, X_test, n_features = load_mutation_spectrum(
+    random_state=RANDOM_SEED, context=CONTEXT
+)
 
 
 i_checkpoint = 0
+
 
 class TrainState(NamedTuple):
     params: hk.Params
@@ -65,11 +66,10 @@ class TrainState(NamedTuple):
     hidden_layer_sizes: tuple[int]
 
 
-
-
 if jax.device_count == 1:
     print("ERROR: Only one visible device!")
     exit(1)
+
 
 def infer_last_checkpoint_number(checkpoint_dir: Path) -> int:
     """Look in checkpoint_dir and find largest checkpoint number."""
@@ -123,9 +123,7 @@ def load_last_checkpoint(
 @hk.transform_with_state
 def kernel(n_hidden_units=HIDDEN_LAYER_SIZES, X=X_train):
     """Advance the Markov chain by one step."""
-    model = MultinomialBelief(
-        n_hidden_units, n_features, gamma_0=GAMMA_0
-    )
+    model = MultinomialBelief(n_hidden_units, n_features, gamma_0=GAMMA_0)
     # Do one Gibbs sampling step.
     model(X)
 
@@ -183,7 +181,6 @@ def train_step(kernel_fn, train_state: TrainState, n_steps) -> TrainState:
     return train_state
 
 
-
 # When starting from scratch, initialize the Markov chain and run with burn in.
 if (train_state := load_last_checkpoint(MODEL, HIDDEN_LAYER_SIZES)) is None:
     key = jax.random.PRNGKey(RANDOM_SEED)
@@ -204,11 +201,11 @@ for _ in range(n_start, n_stop):
     print("Burn in", train_state.step)
 
 for _ in range(10):
-  trace = []
-  for i in range(LOG_EVERY):
-      train_state = train_step(kernel_fn, train_state, n_steps=1)
-      trace.append(train_state.state)
-  
-  states = jax.tree_util.tree_map(lambda *xs: jnp.stack(xs, axis=1), *trace)
-  
-  save_states(train_state, states)
+    trace = []
+    for i in range(LOG_EVERY):
+        train_state = train_step(kernel_fn, train_state, n_steps=1)
+        trace.append(train_state.state)
+
+    states = jax.tree_util.tree_map(lambda *xs: jnp.stack(xs, axis=1), *trace)
+
+    save_states(train_state, states)

@@ -5,14 +5,16 @@ from jax import random
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import NMF
+
 # from mubelnet.utils import perplexity
 from statkit.non_parametric import bootstrap_score
 
-_PATH = Path(__file__).parent.parent/ "data" / "vcf"
+_PATH = Path(__file__).parent.parent / "data" / "vcf"
 _FILE_PATH = Path(__file__).parent.parent / "results" / "cluster.txt"
 NMF_INIT = "nndsvdar"
 BETA_LOSS = "kullback-leibler"
 SIGNATURES = 48
+
 
 def perplexity(X, probs):
     n_words = X.sum(axis=1, keepdims=True)
@@ -20,6 +22,7 @@ def perplexity(X, probs):
     log_probs = np.where(np.isneginf(log_probs) & (X == 0.0), 0.0, log_probs)
     log_likel = X * log_probs
     return np.exp(-np.nanmean(np.sum(log_likel / n_words, axis=1))) / 10
+
 
 def calculate_bootstrap_score(X_train, X_test, signatures, nmf_init, beta_loss):
     results = {
@@ -45,17 +48,23 @@ def calculate_bootstrap_score(X_train, X_test, signatures, nmf_init, beta_loss):
     print(f"Deleting zero rows: {zero_rows}")
     X_train_subset = np.delete(X_train, zero_rows, axis=0)
     probs_sigprof_xtrct_subset = np.delete(probs_sigprof_xtrct, zero_rows, axis=0)
-    pp_train = bootstrap_score(X_train_subset, probs_sigprof_xtrct_subset, metric=perplexity, random_state=43)
+    pp_train = bootstrap_score(
+        X_train_subset, probs_sigprof_xtrct_subset, metric=perplexity, random_state=43
+    )
     results["Train perplexity"] = pp_train
     is_inf = (probs_sigprof_xtrct == 0) & (X_test > 0)
-    X_test_eps  = np.where(is_inf, np.finfo(np.float64).tiny, X_test)
-    pp_test = bootstrap_score(X_test_eps, probs_sigprof_xtrct, metric=perplexity, random_state=43)
+    X_test_eps = np.where(is_inf, np.finfo(np.float64).tiny, X_test)
+    pp_test = bootstrap_score(
+        X_test_eps, probs_sigprof_xtrct, metric=perplexity, random_state=43
+    )
     results["Test perplexity"] = pp_test
     zero_rows = np.where(is_inf)[0]
-    print('Deleting rows', zero_rows)
+    print("Deleting rows", zero_rows)
     X_test_subset = np.delete(X_test, zero_rows, axis=0)
     probs_sigprof_xtrct_subset = np.delete(probs_sigprof_xtrct, zero_rows, axis=0)
-    pp_test_sub = bootstrap_score(X_test_subset, probs_sigprof_xtrct_subset, metric=perplexity, random_state=43)
+    pp_test_sub = bootstrap_score(
+        X_test_subset, probs_sigprof_xtrct_subset, metric=perplexity, random_state=43
+    )
     results["Test subset perplexity"] = pp_test_sub
     return results
 
@@ -66,7 +75,7 @@ files = [
     "sbs.24576.parquet",
     "sbs.24576.amino.parquet",
     "sbs.24576.nucl_strength.parquet",
-    "sbs.24576.structure.parquet"
+    "sbs.24576.structure.parquet",
 ]
 
 
@@ -78,7 +87,9 @@ with open(_FILE_PATH, "w") as f:
         df = df[[df.columns[0]] + sorted(df.columns[1:])]
         all_genomes = np.array(df.iloc[:, 1:])
         X_train, X_test = holdout_split(random.PRNGKey(43), all_genomes)
-        pp_dict = calculate_bootstrap_score(X_train, X_test, SIGNATURES, NMF_INIT, BETA_LOSS)
+        pp_dict = calculate_bootstrap_score(
+            X_train, X_test, SIGNATURES, NMF_INIT, BETA_LOSS
+        )
         for key, value in pp_dict.items():
             f.write(f"{file}\t{key}\t{value.latex()}\n")
         print(f"Done for {file=}")
