@@ -5,4 +5,3 @@ statkit==0.2.3
 arviz==0.17.0
 SigProfilerExtractor==1.1.23
 SigProfilerAssignment==0.1.0
-scikit-learn==1.3.2

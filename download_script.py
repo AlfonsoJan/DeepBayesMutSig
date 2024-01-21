@@ -2,9 +2,8 @@
 """
 Script to download and unzip files from given URLs.
 
-This script defines a function `download_and_unzip_if_not_exists` that downloads
-and unzips files from the provided URLs to a specified folder, skipping the process
-if the file already exists in the folder.
+This script downloads and unzips files from the provided URLs to a specified folder,
+skipping the process if the file already exists in the folder.
 
 Usage:
     Modify the `urls` list with the desired URLs.
@@ -25,6 +24,7 @@ URLS: list[str] = [
     "https://dcc.icgc.org/api/v1/download?fn=/PCAWG/mutational_signatures/Input_Data_PCAWG7_23K_Spectra_DB/vcf_like_simple_files/WES_Other.20180327.simple.gz",
     "https://dcc.icgc.org/api/v1/download?fn=/PCAWG/mutational_signatures/Input_Data_PCAWG7_23K_Spectra_DB/vcf_like_simple_files/WGS_Other.20180413.simple.gz",
 ]
+
 
 # Function to download and unzip files
 def download_and_unzip(url: str, folder: Path) -> None:

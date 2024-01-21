@@ -1,0 +1,7 @@
+sbs.24576.parquet	6.52$^{+0.03}_{-0.03} \cdot 10^{2}$
+
+sbs.24576.amino.parquet	6.67$^{+0.02}_{-0.03} \cdot 10^{2}$
+
+sbs.24576.nucl_strength.parquet	6.54$^{+0.03}_{-0.03} \cdot 10^{2}$
+
+sbs.24576.structure.parquet	6.67$^{+0.03}_{-0.03} \cdot 10^{2}$
