@@ -1,3 +1,7 @@
+"""
+Module to create plots.
+Author: H.C. Donker
+"""
 from matplotlib import pyplot as plt
 import numpy as np
 
@@ -13,7 +17,7 @@ def sortable_by_substitution(x):
 
 
 def plot_cosmic_2nd_order_signatures_95ci(weights, ax=None, tau_t=3):
-    """Plot the distribution over COSMIC v3.3 mutational signatures."""
+    """Plot the distribution over COSMIC v3.4 mutational signatures."""
     if ax is None:
         ax = plt.gca()
     n_signatures = COSMIC_WEIGHTS.shape[0]

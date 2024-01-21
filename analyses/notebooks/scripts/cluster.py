@@ -96,8 +96,13 @@ def cluster_sbs_9_context(sbs_9_context: pd.DataFrame) -> None:
 from typing import List, Tuple
 import numpy as np
 
+
 def calculate_bootstrap_score(
-    X_train: np.ndarray, X_test: np.ndarray, signatures: int, nmf_init: str, beta_loss: str
+    X_train: np.ndarray,
+    X_test: np.ndarray,
+    signatures: int,
+    nmf_init: str,
+    beta_loss: str,
 ) -> float:
     """
     Calculate the bootstrap score for a given set of data.

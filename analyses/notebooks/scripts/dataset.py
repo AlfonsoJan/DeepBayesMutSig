@@ -9,7 +9,9 @@ import haiku as hk
 import jax.numpy as jnp
 import pandas as pd
 
-_COSMIC_PATH = Path(__file__).parent.parent.parent.parent  / "data" / "COSMIC_v3.3_SBS_GRCh37.txt"
+_COSMIC_PATH = (
+    Path(__file__).parent.parent.parent.parent / "data" / "COSMIC_v3.3_SBS_GRCh37.txt"
+)
 COSMIC_WEIGHTS = pd.read_csv(_COSMIC_PATH, sep="\t", index_col=0).T
 _PATH_SBS = Path(__file__).parent.parent.parent / "SBS"
 

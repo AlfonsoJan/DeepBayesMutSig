@@ -2,9 +2,8 @@
 """
 Script to download and unzip files from given URLs.
 
-This script defines a function `download_and_unzip_if_not_exists` that downloads
-and unzips files from the provided URLs to a specified folder, skipping the process
-if the file already exists in the folder.
+This script downloads and unzips files from the provided URLs to a specified folder,
+skipping the process if the file already exists in the folder.
 
 Usage:
     Modify the `urls` list with the desired URLs.
