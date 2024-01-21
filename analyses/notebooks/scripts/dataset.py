@@ -9,11 +9,9 @@ import haiku as hk
 import jax.numpy as jnp
 import pandas as pd
 
-
-_PATH_COSMIC_FOLDER = Path(__file__).parent.parent.parent / "data"
-_COSMIC_PATH = _PATH_COSMIC_FOLDER / "COSMIC_v3.3_SBS_GRCh37.txt"
+_COSMIC_PATH = Path(__file__).parent.parent.parent.parent  / "data" / "COSMIC_v3.3_SBS_GRCh37.txt"
 COSMIC_WEIGHTS = pd.read_csv(_COSMIC_PATH, sep="\t", index_col=0).T
-_PATH_SBS = Path(__file__).parent.parent / "SBS"
+_PATH_SBS = Path(__file__).parent.parent.parent / "SBS"
 
 
 def _read_sbs_file(filename: str, folder: Path = _PATH_SBS) -> pd.DataFrame:
