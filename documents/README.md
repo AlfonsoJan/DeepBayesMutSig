@@ -4,6 +4,10 @@
 
 The `documents` folder contains important documents related to school, research, or any relevant materials. These documents may include academic papers, project proposals, and other resources that contribute to the understanding and development of the project.
 
+### `paper.pdf`
+
+The paper that goes with this study.
+
 ### `project_proposal.pdf`
 
 Is my project proposal for this project/research.

@@ -11,7 +11,3 @@ Mutational signatures based on an analysis of 10,952 exomes and 1,048 whole-geno
 ### `COSMIC_v3.4_SBS_GRCh37.txt`
 
 Updated version of `COSMIC_v3.3_SBS_GRCh37.txt`.
-
-### `WGS_PCAWG.96.csv`
-
-File contains all of the following the pyrimidine single nucleotide variants, N[{C > A, G, or T} or {T > A, G, or C}]N. 4 possible starting nucleotides x 6 pyrimidine variants x 4 ending nucleotides = 96 total combinations. Comma seperated.
